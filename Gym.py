@@ -1,5 +1,5 @@
 import random
-
+#ay
 # Matriz de markobv cada maquina
 states = [0] * 10
 #Pecho/Tricep

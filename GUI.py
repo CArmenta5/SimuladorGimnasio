@@ -97,7 +97,7 @@ def changeState( canvas : Canvas):
             canvas.itemconfig(statesCircles[i], fill='red')
     for element in states:
         print(element)
-
+#print
 
 def main():
     ventana.title("Simulador de Gimnasio")
