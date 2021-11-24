@@ -1,6 +1,10 @@
 from tkinter import *
 import tkinter
+from PIL import ImageTk, Image
 
+states = [0] * 10
+statesCircles = [0] * 10
+statesCoord = {}
 def CanvasLeft(ventana):
     # Configuración del canvas
     canvas1 = Canvas(ventana)
@@ -16,7 +20,7 @@ def CanvasLeft(ventana):
     RutinaList = [
         "Pierna",
         "Espalda",
-        "Pierna"
+        "Pecho"
     ] 
 
     dropdown = tkinter.StringVar(ventana)
@@ -30,22 +34,65 @@ def CanvasLeft(ventana):
     boton.config(width=10, font=('Helvetica', 11), fg="white",bg="light slate blue")
     boton.place(x=80, y=220)
 
+def CanvasRight(ventana : Tk):
+    canvas2 = Canvas(ventana, bg="alice blue", width=920, height=800)
 
-def CanvasRight(ventana):
-
-    #Configuración de canvas
-    canvas2 = Canvas(ventana)
-    canvas2.config(width=920, height=800)
-    canvas2.config(bg="alice blue")
+    # Configuración de canvas
+    
     canvas2.place(relx=1.0, rely=1.0, anchor=SE)
     
-    # Texto
+    # Titulo
     canvas2.create_text(475, 50, text="GYM TEC", fill="black", font=('Helvetica 25 bold'))
 
-    #canvas2.create_oval(100, 10, 180, 80, width=2, fill='blue')
+
+    img = Image.open("eliptica.png")
+    resized_image= img.resize((120,120), Image.ANTIALIAS)
+    canvas2.image = ImageTk.PhotoImage(resized_image)
 
     #Maquinas
-   
+    canvas2.create_image(140,155, image= canvas2.image, anchor = "nw")
+    statesCircles[0] = canvas2.create_oval(190, 295, 210, 315, width=2, fill='red')
+
+    canvas2.create_image(400,155, image= canvas2.image, anchor = "nw")
+    statesCircles[1] = canvas2.create_oval(450, 295, 470, 315, width=2, fill='red')
+
+    canvas2.create_image(660,155, image= canvas2.image, anchor = "nw")
+    statesCircles[2] = canvas2.create_oval(710, 295, 730, 315, width=2, fill='red')
+
+    canvas2.create_image(60,345, image= canvas2.image, anchor = "nw")
+    statesCircles[3] = canvas2.create_oval(110, 485, 130, 505, width=2, fill='red')
+
+    canvas2.create_image(290,345, image= canvas2.image, anchor = "nw")
+    statesCircles[4] = canvas2.create_oval(340, 485, 360, 505, width=2, fill='red')
+
+    canvas2.create_image(520,345, image= canvas2.image, anchor = "nw")
+    statesCircles[5] = canvas2.create_oval(570, 485, 590, 505, width=2, fill='red')
+
+    canvas2.create_image(750,345, image= canvas2.image, anchor = "nw")
+    statesCircles[6] = canvas2.create_oval(800, 485, 820, 505, width=2, fill='red')
+    
+    canvas2.create_image(140,535, image= canvas2.image, anchor = "nw")
+    statesCircles[7] = canvas2.create_oval(190, 675, 210, 695, width=2, fill='red')
+
+    canvas2.create_image(400,535, image= canvas2.image, anchor = "nw")
+    statesCircles[8] = canvas2.create_oval(450, 675, 470, 695, width=2, fill='red')
+
+    canvas2.create_image(660,535, image= canvas2.image, anchor = "nw")
+    statesCircles[9] = canvas2.create_oval(710, 675, 730, 695, width=2, fill='red')
+  
+    ventana.after(1000,changeState(3,canvas2))
+
+def changeState(index, canvas : Canvas):
+    print("hello")
+    if states[index] == 0:
+        canvas.itemconfig(statesCircles[index], fill='green')
+        states[index] = 1
+    
+    else:
+        states[index] = 0   
+        canvas.itemconfig(statesCircles[index], fill='red')
+
+
 def main():
     ventana.title("Simulador de Gimnasio")
     ventana.geometry("1200x800")
@@ -54,6 +101,7 @@ def main():
 
 if __name__ == "__main__":
     ventana = Tk()
+    
     main()
     CanvasLeft(ventana)
     CanvasRight(ventana)
