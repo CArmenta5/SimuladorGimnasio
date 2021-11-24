@@ -8,6 +8,7 @@ print("IMPRIMIENDO LOS ESTADOS DESTATES")
 #for elemento in states:
     #print(elemento)
 statesCircles = [0] * 10
+statesPCircles = [0] * 10
 statesCoord = {}
 def CanvasLeft(ventana):
     # Configuración del canvas
@@ -55,35 +56,46 @@ def CanvasRight(ventana : Tk):
 
     #Maquinas
     canvas2.create_image(140,155, image= canvas2.image, anchor = "nw")
-    statesCircles[0] = canvas2.create_oval(190, 295, 210, 315, width=2, fill='red')
+    statesCircles[0] = canvas2.create_oval(190, 280, 210, 300, width=2, fill='red')
+    statesPCircles[0] = canvas2.create_oval(190, 310, 210, 330, width=2, fill='red')
 
     canvas2.create_image(400,155, image= canvas2.image, anchor = "nw")
-    statesCircles[1] = canvas2.create_oval(450, 295, 470, 315, width=2, fill='red')
+    statesCircles[1] = canvas2.create_oval(450, 280, 470, 300, width=2, fill='red')
+    statesPCircles[1] = canvas2.create_oval(450, 310, 470, 330, width=2, fill='red')
 
     canvas2.create_image(660,155, image= canvas2.image, anchor = "nw")
-    statesCircles[2] = canvas2.create_oval(710, 295, 730, 315, width=2, fill='red')
+    statesCircles[2] = canvas2.create_oval(710, 280, 730, 300, width=2, fill='red')
+    statesPCircles[2] = canvas2.create_oval(710, 310, 730, 330, width=2, fill='red')
 
     canvas2.create_image(60,345, image= canvas2.image, anchor = "nw")
-    statesCircles[3] = canvas2.create_oval(110, 485, 130, 505, width=2, fill='red')
+    statesCircles[3] = canvas2.create_oval(110, 470, 130, 490, width=2, fill='red')
+    statesPCircles[3] = canvas2.create_oval(110, 500, 130, 520, width=2, fill='red')
 
     canvas2.create_image(290,345, image= canvas2.image, anchor = "nw")
-    statesCircles[4] = canvas2.create_oval(340, 485, 360, 505, width=2, fill='red')
+    statesCircles[4] = canvas2.create_oval(340, 470, 360, 490, width=2, fill='red')
+    statesPCircles[4] = canvas2.create_oval(340, 500, 360, 520, width=2, fill='red')
 
     canvas2.create_image(520,345, image= canvas2.image, anchor = "nw")
-    statesCircles[5] = canvas2.create_oval(570, 485, 590, 505, width=2, fill='red')
+    statesCircles[5] = canvas2.create_oval(570, 470, 590, 490, width=2, fill='red')
+    statesPCircles[5] = canvas2.create_oval(570, 500, 590, 520, width=2, fill='red')
 
     canvas2.create_image(750,345, image= canvas2.image, anchor = "nw")
-    statesCircles[6] = canvas2.create_oval(800, 485, 820, 505, width=2, fill='red')
-    
+    statesCircles[6] = canvas2.create_oval(800, 470, 820, 490, width=2, fill='red')
+    statesPCircles[6] = canvas2.create_oval(800, 500, 820, 520, width=2, fill='red')
+
+
     canvas2.create_image(140,535, image= canvas2.image, anchor = "nw")
-    statesCircles[7] = canvas2.create_oval(190, 675, 210, 695, width=2, fill='red')
+    statesCircles[7] = canvas2.create_oval(190, 660, 210, 680, width=2, fill='red')
+    statesPCircles[7] = canvas2.create_oval(190, 690, 210, 710, width=2, fill='red')
 
     canvas2.create_image(400,535, image= canvas2.image, anchor = "nw")
-    statesCircles[8] = canvas2.create_oval(450, 675, 470, 695, width=2, fill='red')
+    statesCircles[8] = canvas2.create_oval(450, 660, 470, 680, width=2, fill='red')
+    statesPCircles[8] = canvas2.create_oval(450, 690, 470, 710, width=2, fill='red')
 
     canvas2.create_image(660,535, image= canvas2.image, anchor = "nw")
-    statesCircles[9] = canvas2.create_oval(710, 675, 730, 695, width=2, fill='red')
-  
+    statesCircles[9] = canvas2.create_oval(710, 660, 730, 680, width=2, fill='red')
+    statesPCircles[9] = canvas2.create_oval(710, 690, 730, 710, width=2, fill='red')
+
     ventana.after(1000,changeState(canvas2))
 
 def changeState( canvas : Canvas):
