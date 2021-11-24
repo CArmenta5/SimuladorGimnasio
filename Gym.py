@@ -103,7 +103,7 @@ def generarRuntina(matriz):
         numero = 0
     return rutina
 
-print(generarRuntina(matrixEspalda))
+#print(generarRuntina(matrixEspalda))
 
 #RECORRIENDO LA RUTINA
 def crearMaquinas():
@@ -116,9 +116,3 @@ def crearMaquinas():
         maquinas.append(tmp)
         print(maquinas[j].nombre, end=",")
     return maquinas
-
-
-
-
-
-
