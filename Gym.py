@@ -112,7 +112,7 @@ def crearMaquinas():
     maquinas = []
     print("NOMBRES DE LAS MAQUINAS ")
     for j in range(0, len(nombres)):
-        tmp = Maquina(nombres[i], 30, False)
+        tmp = Maquina(nombres[j], 30, False)
         maquinas.append(tmp)
         print(maquinas[j].nombre, end=",")
     return maquinas
