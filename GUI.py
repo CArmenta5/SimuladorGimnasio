@@ -157,12 +157,9 @@ print("IMPRIMIENDO LOS ESTADOS DESTATES")
     #print(elemento)
 statesCircles = [0] * 10
 statesPCircles = [0] * 10
-<<<<<<< HEAD
-img_ref = []
-=======
-statesCoord = {}
 
->>>>>>> 68c319f53b25a2d75a5956c9bf2be8c51297b765
+img_ref = []
+
 def CanvasLeft(ventana):
     # Configuración del canvas
     canvas1 = Canvas(ventana)
@@ -231,43 +228,43 @@ def CanvasRight(ventana : Tk):
     canvas2.create_text(475, 50, text="GYM TEC", fill="black", font=('Helvetica 25 bold'))
 
 
-    image0 = ImageTk.PhotoImage(Image.open("eliptica.png").resize((120,120), Image.ANTIALIAS))
+    image0 = ImageTk.PhotoImage(Image.open("images/eliptica.png").resize((120,120), Image.ANTIALIAS))
     canvas2.create_image(140,155, image= image0, anchor = "nw")
     img_ref.append(image0)
 
-    image1 = ImageTk.PhotoImage(Image.open("caminadora.png").resize((120,120), Image.ANTIALIAS))
+    image1 = ImageTk.PhotoImage(Image.open("images/caminadora.png").resize((120,120), Image.ANTIALIAS))
     canvas2.create_image(400,155, image= image1, anchor = "nw")
     img_ref.append(image1)
 
-    image2 = ImageTk.PhotoImage(Image.open("pullup_dip.png").resize((120,120), Image.ANTIALIAS))
+    image2 = ImageTk.PhotoImage(Image.open("images/pullup_dip.png").resize((120,120), Image.ANTIALIAS))
     canvas2.create_image(660,155, image= image2, anchor = "nw")
     img_ref.append(image2)
 
-    image3 = ImageTk.PhotoImage(Image.open("cable.png").resize((120,120), Image.ANTIALIAS))
+    image3 = ImageTk.PhotoImage(Image.open("images/cable.png").resize((120,120), Image.ANTIALIAS))
     canvas2.create_image(60,345, image= image3, anchor = "nw")
     img_ref.append(image3)
 
-    image4 = ImageTk.PhotoImage(Image.open("brech_press.png").resize((120,120), Image.ANTIALIAS))
+    image4 = ImageTk.PhotoImage(Image.open("images/brech_press.png").resize((120,120), Image.ANTIALIAS))
     canvas2.create_image(290,345, image= image4, anchor = "nw")
     img_ref.append(image4)
 
-    image5 = ImageTk.PhotoImage(Image.open("tricep_extension_machine.png").resize((120,120), Image.ANTIALIAS))
+    image5 = ImageTk.PhotoImage(Image.open("images/tricep_extension_machine.png").resize((120,120), Image.ANTIALIAS))
     canvas2.create_image(520,345, image= image5, anchor = "nw")
     img_ref.append(image5)
 
-    image6 = ImageTk.PhotoImage(Image.open("sentadilla_smith.png").resize((120,120), Image.ANTIALIAS))
+    image6 = ImageTk.PhotoImage(Image.open("images/sentadilla_smith.png").resize((120,120), Image.ANTIALIAS))
     canvas2.create_image(750,345, image= image6, anchor = "nw")
     img_ref.append(image6)
 
-    image7 = ImageTk.PhotoImage(Image.open("row_machine.png").resize((120,120), Image.ANTIALIAS))
+    image7 = ImageTk.PhotoImage(Image.open("images/row_machine.png").resize((120,120), Image.ANTIALIAS))
     canvas2.create_image(140,535, image= image7, anchor = "nw")
     img_ref.append(image7)
 
-    image8 = ImageTk.PhotoImage(Image.open("cuadriceps_extension.png").resize((120,120), Image.ANTIALIAS))
+    image8 = ImageTk.PhotoImage(Image.open("images/cuadriceps_extension.png").resize((120,120), Image.ANTIALIAS))
     canvas2.create_image(400,535, image= image8, anchor = "nw")
     img_ref.append(image8)
 
-    image9 = ImageTk.PhotoImage(Image.open("curl_acostado_femoral.png").resize((120,120), Image.ANTIALIAS))
+    image9 = ImageTk.PhotoImage(Image.open("images/curl_acostado_femoral.png").resize((120,120), Image.ANTIALIAS))
     canvas2.create_image(660,535, image= image9, anchor = "nw")
     img_ref.append(image9)
 
