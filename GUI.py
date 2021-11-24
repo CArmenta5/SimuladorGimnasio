@@ -1,11 +1,12 @@
 from tkinter import *
 import tkinter
-from PIL import ImageTk, Image
 import Gym
+from PIL import ImageTk, Image
 states = [1,1,1,1,1,1,1,1,1,1]
+maquinas = Gym.crearMaquinas()
 print("IMPRIMIENDO LOS ESTADOS DESTATES")
-for elemento in states:
-    print(elemento)
+#for elemento in states:
+    #print(elemento)
 statesCircles = [0] * 10
 statesCoord = {}
 def CanvasLeft(ventana):
@@ -95,14 +96,15 @@ def changeState( canvas : Canvas):
         else:
             #states[i] = 0
             canvas.itemconfig(statesCircles[i], fill='red')
-    for element in states:
-        print(element)
+    #for element in states:
+       # print(element)
 #print
 
 def main():
     ventana.title("Simulador de Gimnasio")
     ventana.geometry("1200x800")
     ventana.resizable(width=False, height=False)
+    #Gym.crearMaquinas()
 
 
 if __name__ == "__main__":
@@ -112,5 +114,6 @@ if __name__ == "__main__":
     CanvasLeft(ventana)
     CanvasRight(ventana)
     ventana.mainloop()
+
 
     
