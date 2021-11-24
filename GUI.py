@@ -55,7 +55,7 @@ def CanvasLeft(ventana):
     #Boton
     boton = tkinter.Button(text="Enviar")
     boton.config(width=10, font=('Helvetica', 11), fg="white",bg="light slate blue", command=buttonClick)
-    boton.place(x=80, y=220) #hola
+    boton.place(x=80, y=220) #hola como estas
 
 def CanvasRight(ventana : Tk):
     canvas2 = Canvas(ventana, bg="alice blue", width=920, height=800)
