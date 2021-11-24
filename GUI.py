@@ -21,9 +21,12 @@ def CanvasLeft(ventana):
     # Texto
     canvas1.create_text(130, 50, text="Simulador de GYM", fill="black", font=('Helvetica 18 bold'))
     canvas1.create_text(135, 150, text="Escoge tu rutina:", fill="black", font=('Helvetica 14 bold'))
+    canvas1.create_text(135, 350, text="Rutina:", fill="black", font=('Helvetica 14 bold'))
+    canvas1.create_text(135, 400, text="[]", fill="black", font=('Helvetica 14'))
 
     # Seleccionar rutina
     RutinaList = [
+        "Escoger",
         "Pierna",
         "Espalda",
         "Pecho"
@@ -35,10 +38,25 @@ def CanvasLeft(ventana):
     opt.config(width=20, font=('Helvetica', 11), bg="lavender")
     opt.place(x=30, y=170)
 
+    # Método click
+    def buttonClick():
+        #Gym.generarRuntina()
+        print(dropdown.get())
+        if(dropdown.get() == "Pierna"):
+            Gym.generarRuntina(matrixPierna)
+        elif(dropdown.get() == "Espalda"):
+            Gym.generarRuntina(matrixEspalda)
+        elif(dropdown.get() == "Pecho"):
+            Gym.generarRuntina(matrixPecho)
+        else:
+            print("No escogiste alguna rutina")
+        
+        #display_selected(dropdown)
+    
     #Boton
     boton = tkinter.Button(text="Enviar")
-    boton.config(width=10, font=('Helvetica', 11), fg="white",bg="light slate blue")
-    boton.place(x=80, y=220)
+    boton.config(width=10, font=('Helvetica', 11), fg="white",bg="light slate blue", command=buttonClick)
+    boton.place(x=80, y=220) #hola como estas
 
 def CanvasRight(ventana : Tk):
     canvas2 = Canvas(ventana, bg="alice blue", width=920, height=800)
@@ -99,6 +117,12 @@ def CanvasRight(ventana : Tk):
 
     ventana.after(1000,changeState(canvas2))
 
+def display_selected(variable):
+    choice = variable.get()
+    print(choice)
+
+
+    
 def changeState( canvas : Canvas):
     for i in range(0,len(states)):
 
