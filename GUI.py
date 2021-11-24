@@ -2,7 +2,6 @@ from tkinter import *
 import tkinter
 
 def CanvasLeft(ventana):
-    
     # Configuración del canvas
     canvas1 = Canvas(ventana)
     canvas1.config(width=280, height=800)
@@ -47,8 +46,6 @@ def CanvasRight(ventana):
 
     #Maquinas
    
-
-    
 def main():
     ventana.title("Simulador de Gimnasio")
     ventana.geometry("1200x800")
@@ -63,5 +60,3 @@ if __name__ == "__main__":
     ventana.mainloop()
 
     
-
-
