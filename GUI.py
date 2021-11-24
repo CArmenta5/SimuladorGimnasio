@@ -147,7 +147,23 @@ for elemento in machines:
 #print(generarRuntina(matrixEspalda))
 
 #RECORRIENDO LA RUTINA
+def recorridoUsuario(matrix):
+    rutina = generarRuntina(matrix)
+    #Checar elementos
+    print(rutina,"\n")
+    for i in rutina:
+        if(machines[i].getEstado()==False):
+           #Ocupado
+           continue;
+        else:
+            #Desocupado
+            machines[i].estado = True
+            
+            print("Usando Maquina: ", machines[i].nombre,"\n")
 
+#recorridoUsuario(matrixEspalda)
+
+#RECORRIENDO LA RUTINA
         
 states = [1,1,1,1,1,1,1,1,1,1]
 maquinas = crear_maquinas()
