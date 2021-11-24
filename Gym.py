@@ -1,7 +1,7 @@
 import random
-
+#ay
 # Matriz de markobv cada maquina
-
+states = [0] * 10
 #Pecho/Tricep
 matrixPecho=[
     [0,0.15,0.05,0.1,0.6,0.02,0.02,0.02,0.02,0.2], # Eliptica
@@ -66,6 +66,7 @@ for i in range (2):
     numero = 0
 
 print(rutina)
+
 
 
 
