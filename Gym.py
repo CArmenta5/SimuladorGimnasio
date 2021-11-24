@@ -36,7 +36,6 @@ class Maquina:
         self.tiempo = tiempo
 
 
-
 # Matriz de markov de las rutinas
 #Pecho/Tricep
 matrixPecho=[
@@ -77,7 +76,19 @@ matrixEspalda= [
     [0,0,0.3,0.3,0,0,0.2,0.2,0,0], # Cuadriceps Extension
     [0,0,0.3,0.3,0,0,0.2,0.2,0,0]] # Curl Acostado Femoral
 
+def crear_maquinas():
 
+    nombres = ["Eliptica","Caminadora","Pullup/Dip Machine","Cable Machine","Bench Press","Tricep Extension Machine","Sentadilla Smith","Row Machine","Cuadriceps extension","Curl acostado Femoral"]
+    maquinas = []
+    print("NOMBRES DE LAS MAQUINAS ")
+    for j in range(0, len(nombres)):
+        tmp = Maquina(nombres[j], False, 30)
+        maquinas.append(tmp)
+        print(maquinas[j].nombre, end=",")
+    return maquinas
+
+
+machines = crear_maquinas()
 
 #Generar rutina
 def generarRuntina(matriz):
@@ -103,19 +114,39 @@ def generarRuntina(matriz):
         numero = 0
     return rutina
 
+
+#Recorrido bots
+
+def generarBots():
+    pos = 3
+    numero = 0
+    for i in range(9):
+        valor = random.uniform(0, 1)
+        acum = matrixEspalda[pos][0]
+        print("Valor: ", valor)
+        print("Acumulación:", acum)
+        for x in range(1, len(matrixEspalda[pos])):
+            print("Dato: ", matrixEspalda[pos][x], "Maquina: ", x)
+            if valor >= acum:
+                acum += matrixEspalda[pos][x]
+                numero = x
+            else:
+                break
+        print("Número: ", numero)
+        machines[numero].estado = True
+        #machines[numero].countDown()
+        pos = numero
+        numero = 0
+    return machines
+generarBots()
+print("MATRIZ A PARTIR DE USUARIOS RANDOM")
+for elemento in machines:
+    print(elemento.estado, elemento.tiempo)
+
 print(generarRuntina(matrixEspalda))
 
 #RECORRIENDO LA RUTINA
-def crearMaquinas():
 
-    nombres = ["Eliptica","Caminadora","Pullup/Dip Machine","Cable Machine","Bench Press","Tricep Extension Machine","Sentadilla Smith","Row Machine","Cuadriceps extension","Curl acostado Femoral"]
-    maquinas = []
-    print("NOMBRES DE LAS MAQUINAS ")
-    for j in range(0, len(nombres)):
-        tmp = Maquina(nombres[j], 30, False)
-        maquinas.append(tmp)
-        print(maquinas[j].nombre, end=",")
-    return maquinas
 
 
 

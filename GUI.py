@@ -3,7 +3,8 @@ import tkinter
 import Gym
 from PIL import ImageTk, Image
 states = [1,1,1,1,1,1,1,1,1,1]
-maquinas = Gym.crearMaquinas()
+maquinas = Gym.crear_maquinas()
+maquinas2 = Gym.generarBots()
 print("IMPRIMIENDO LOS ESTADOS DESTATES")
 #for elemento in states:
     #print(elemento)
