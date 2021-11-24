@@ -32,7 +32,7 @@ class Maquina:
         self.estado = False
 
     def usarMaquina(self, tiempo):
-        self.estado = True
+        self.estado = False
         self.tiempo = tiempo
 
 
@@ -96,14 +96,14 @@ def generarRuntina(matriz):
     pos = 0
     numero = 0
     rutina.append(numero)
-    for i in range (9):
+    for i in range (5):
         valor = random.uniform(0, 1)
         acum = matriz[pos][0]
         print("Valor: ", valor)
         print("Acumulación:", acum)
         for x in range(1, len(matriz[pos])):
             print("Dato: ", matriz[pos][x], "Maquina: ", x)
-            if valor >= acum:
+            if (valor >= acum):
                 acum += matriz[pos][x]
                 numero = x
             else:
@@ -138,16 +138,30 @@ def generarBots():
         pos = numero
         numero = 0
     return machines
+
 generarBots()
 print("MATRIZ A PARTIR DE USUARIOS RANDOM")
 for elemento in machines:
     print(elemento.estado, elemento.tiempo)
 
-print(generarRuntina(matrixEspalda))
+
 
 #RECORRIENDO LA RUTINA
+def recorridoUsuario(matrix):
+    rutina = generarRuntina(matrix)
+    #Checar elementos
+    print(rutina,"\n")
+    for i in rutina:
+        if(machines[i].getEstado()==False):
+           #Ocupado
+           continue;
+        else:
+            #Desocupado
+            machines[i].estado = True
+            
+            print("Usando Maquina: ", machines[i].nombre,"\n")
 
-
+recorridoUsuario(matrixEspalda)
 
 
 
