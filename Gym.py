@@ -1,6 +1,6 @@
 import random
 
-# Matriz de markobv cada maquina
+# Matriz de markov de las rutinas
 
 #Pecho/Tricep
 matrixPecho=[
@@ -41,31 +41,31 @@ matrixEspalda= [
     [0,0,0.3,0.3,0,0,0.2,0.2,0,0], # Cuadriceps Extension
     [0,0,0.3,0.3,0,0,0.2,0.2,0,0]] # Curl Acostado Femoral
 
-
-rutina = []
-pos = 0
-numero = 0
-#Generar rutina
-
-for i in range (2):
-    valor = random.uniform(0, 1)
-    acum = matrixPecho[pos][0]
-    print("Valor: ", valor)
-    print("Acumulación:", acum)
-    for x in range(1, len(matrixPecho[pos])):
-        print("Dato: ", matrixPecho[pos][x], "Maquina: ", x)
-        if valor >= acum:
-            acum += matrixPecho[pos][x]
-            numero = x
-        else:
-            break
-
-    rutina.append(numero)
-    print("Número: ", numero)
-    pos = numero
+# Generar rutina 
+def generarRuntina(matriz):
+    rutina = []
+    pos = 0
     numero = 0
+    rutina.append(numero)
+    for i in range (9):
+        valor = random.uniform(0, 1)
+        acum = matriz[pos][0]
+        print("Valor: ", valor)
+        print("Acumulación:", acum)
+        for x in range(1, len(matriz[pos])):
+            print("Dato: ", matriz[pos][x], "Maquina: ", x)
+            if valor >= acum:
+                acum += matriz[pos][x]
+                numero = x
+            else:
+                break
+        rutina.append(numero)
+        print("Número: ", numero)
+        pos = numero
+        numero = 0
+    return rutina
 
-print(rutina)
+print(generarRuntina(matrixEspalda))
 
 
 
