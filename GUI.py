@@ -1,8 +1,11 @@
 from tkinter import *
 import tkinter
 from PIL import ImageTk, Image
-
-states = [0] * 10
+import Gym
+states = [1,1,1,1,1,1,1,1,1,1]
+print("IMPRIMIENDO LOS ESTADOS DESTATES")
+for elemento in states:
+    print(elemento)
 statesCircles = [0] * 10
 statesCoord = {}
 def CanvasLeft(ventana):
@@ -80,17 +83,20 @@ def CanvasRight(ventana : Tk):
     canvas2.create_image(660,535, image= canvas2.image, anchor = "nw")
     statesCircles[9] = canvas2.create_oval(710, 675, 730, 695, width=2, fill='red')
   
-    ventana.after(1000,changeState(3,canvas2))
+    ventana.after(1000,changeState(canvas2))
 
-def changeState(index, canvas : Canvas):
-    print("hello")
-    if states[index] == 0:
-        canvas.itemconfig(statesCircles[index], fill='green')
-        states[index] = 1
-    
-    else:
-        states[index] = 0   
-        canvas.itemconfig(statesCircles[index], fill='red')
+def changeState( canvas : Canvas):
+    for i in range(0,len(states)):
+
+        if states[i] == 0:
+            canvas.itemconfig(statesCircles[i], fill='green')
+            #states[i] = 1
+
+        else:
+            #states[i] = 0
+            canvas.itemconfig(statesCircles[i], fill='red')
+    for element in states:
+        print(element)
 
 
 def main():
