@@ -139,7 +139,7 @@ def generarBots():
         numero = 0
     return machines
 
-generarBots()
+
 print("MATRIZ A PARTIR DE USUARIOS RANDOM")
 for elemento in machines:
     print(elemento.estado, elemento.tiempo)
@@ -178,7 +178,8 @@ def recorridoUsuario(matrix):
 
                 #print("Usando Maquina: ", machines[i].nombre,"\n")
     print("TERMINASTE TU RUTINA")
-recorridoUsuario(matrixEspalda)
+    
+
 
 #RECORRIENDO LA RUTINA
         
@@ -343,16 +344,15 @@ def display_selected(variable):
 
 def changeState( canvas : Canvas):
     for i in range(0,len(states)):
-
         if states[i] == 0:
             canvas.itemconfig(statesCircles[i], fill='green')
             #states[i] = 1
-
         else:
             #states[i] = 0
             canvas.itemconfig(statesCircles[i], fill='red')
     #for element in states:
        # print(element)
+
 #print
 
 def main():
@@ -369,6 +369,8 @@ if __name__ == "__main__":
     CanvasLeft(ventana)
     CanvasRight(ventana)
     ventana.mainloop()
+    generarBots()
+    recorridoUsuario(matrixEspalda)
 
 
     
