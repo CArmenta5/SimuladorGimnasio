@@ -118,12 +118,13 @@ def generarRuntina(matriz):
 #Recorrido bots
 
 def generarBots():
+    print("Bot generado")
     pos = 3
     numero = 0
     for i in range(1):
         valor = random.uniform(0, 1)
         acum = matrixEspalda[pos][0]
-       # print("Valor: ", valor)
+        #print("Valor: ", valor)
         #print("Acumulación:", acum)
         for x in range(1, len(matrixEspalda[pos])):
             #print("Dato: ", matrixEspalda[pos][x], "Maquina: ", x)
@@ -141,16 +142,14 @@ def generarBots():
 
 
 print("MATRIZ A PARTIR DE USUARIOS RANDOM")
-for elemento in machines:
-    print(elemento.estado, elemento.tiempo)
+#for elemento in machines:
+#    print(elemento.estado, elemento.tiempo)
 
 #print(generarRuntina(matrixEspalda))
 
 #RECORRIENDO LA RUTINA
-def recorridoUsuario(matrix):
-
+def recorridoUsuario(rutina):
     finish = False
-    rutina = generarRuntina(matrix)
     print("TU RUTINA IDEAL ES:")
     for i in rutina:
         print(machines[i].nombre, end= ",")
@@ -158,23 +157,26 @@ def recorridoUsuario(matrix):
     #print(rutina, "\n")
     done = 0
     while not finish:
-        if done == 8:
-            finish = True
+        print("Done: ", done)
         for i in rutina:
+            if done >= len(rutina):
+                finish = True
+                break
             if(machines[i].getEstado()==True):
                #Ocupado
                print("LA MAQUINA " + machines[i].nombre + " ESTA OCUPADA, BUSCANDO OTRA \n")
-               time.sleep(5)
-               machines[i].estado = True
+               time.sleep(1)
+               machines[i].estado = False
                continue;
             else:
                 #Desocupado
                 print("IR A LA MAQUINA " + machines[i].nombre)
-                time.sleep(5)
+                time.sleep(1)
                 done +=1
-                #machines[i].estado = True
+                machines[i].estado = True
                 rutina.remove(i)
                 i = 0
+            print("Done: ", done)
 
                 #print("Usando Maquina: ", machines[i].nombre,"\n")
     print("TERMINASTE TU RUTINA")
@@ -185,7 +187,7 @@ def recorridoUsuario(matrix):
         
 states = [1,1,1,1,1,1,1,1,1,1]
 maquinas = crear_maquinas()
-maquinas2 = generarBots()
+#maquinas2 = generarBots()
 print("IMPRIMIENDO LOS ESTADOS DESTATES")
 #for elemento in states:
     #print(elemento)
@@ -232,15 +234,20 @@ def CanvasLeft(ventana):
     # Método click
     def buttonClick():
         print("Escogiste: ", dropdown.get())
+        generarBots()
         if(dropdown.get() == "Pierna"):
             rutinaG = generarRuntina(matrixPierna)
             canvas1.itemconfig(mytext, text=maquinasRutina(rutinaG))
+            recorridoUsuario(rutinaG)
         elif(dropdown.get() == "Espalda"):
             rutinaG = generarRuntina(matrixEspalda)
             canvas1.itemconfig(mytext, text=maquinasRutina(rutinaG))
+            recorridoUsuario(rutinaG)
         elif(dropdown.get() == "Pecho"):
             rutinaG = generarRuntina(matrixPecho)
             canvas1.itemconfig(mytext, text=maquinasRutina(rutinaG))
+            time.sleep(5)
+            recorridoUsuario(rutinaG)
         else:
             print("No escogiste alguna rutina")
         
@@ -361,7 +368,6 @@ def main():
     ventana.resizable(width=False, height=False)
     #Gym.crearMaquinas()
 
-
 if __name__ == "__main__":
     ventana = Tk()
     
@@ -369,8 +375,9 @@ if __name__ == "__main__":
     CanvasLeft(ventana)
     CanvasRight(ventana)
     ventana.mainloop()
-    generarBots()
-    recorridoUsuario(matrixEspalda)
+
+   
+    
 
 
     
