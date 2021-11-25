@@ -124,10 +124,7 @@ def generarBots():
     for i in range(1):
         valor = random.uniform(0, 1)
         acum = matrixEspalda[pos][0]
-        #print("Valor: ", valor)
-        #print("Acumulación:", acum)
         for x in range(1, len(matrixEspalda[pos])):
-            #print("Dato: ", matrixEspalda[pos][x], "Maquina: ", x)
             if valor >= acum:
                 acum += matrixEspalda[pos][x]
                 numero = x
@@ -135,7 +132,7 @@ def generarBots():
                 break
         #print("Número: ", numero)
         machines[numero].estado = True
-        #machines[numero].countDown()
+        changeState(canvasReference[0], numero, machines[numero], False)
         pos = numero
         numero = 0
     return machines
@@ -149,36 +146,48 @@ print("MATRIZ A PARTIR DE USUARIOS RANDOM")
 
 #RECORRIENDO LA RUTINA
 def recorridoUsuario(rutina):
-    finish = False
+    size = len(rutina)
     print("TU RUTINA IDEAL ES:")
     for i in rutina:
         print(machines[i].nombre, end= ",")
-    # Checar elementos
-    #print(rutina, "\n")
-    done = 0
-    while not finish:
-        print("Done: ", done)
-        for i in rutina:
-            if done >= len(rutina):
-                finish = True
-                break
-            if(machines[i].getEstado()==True):
-               #Ocupado
-               print("LA MAQUINA " + machines[i].nombre + " ESTA OCUPADA, BUSCANDO OTRA \n")
-               time.sleep(1)
-               machines[i].estado = False
-               continue;
-            else:
-                #Desocupado
-                print("IR A LA MAQUINA " + machines[i].nombre)
-                time.sleep(1)
-                done +=1
-                machines[i].estado = True
-                rutina.remove(i)
-                i = 0
-            print("Done: ", done)
 
-                #print("Usando Maquina: ", machines[i].nombre,"\n")
+    i = 0
+    while i < size:
+        generarBots()
+        machines[i].tiempo -= 15
+        for curr in machines:
+            curr.tiempo -= 15
+            if curr.getTiempo() < 5:
+                curr.estado = False
+                changeState(canvasReference[0], rutina[i], machines[rutina[i]], False)
+
+
+        if machines[rutina[i]].tiempo < 5:
+            machines[rutina[i]].setEstado(False)
+            changeState(canvasReference[0], rutina[i], machines[rutina[i]], False)
+        if machines[rutina[i]].getEstado()==True:
+
+            #Ocupado
+            print("LA MAQUINA " + machines[rutina[i]].nombre + " ESTA OCUPADA, BUSCANDO OTRA \n")
+            time.sleep(1)
+            i += 1
+            if i >= len(rutina):
+                i = 0
+        else:
+            #Desocupado
+            print("IR A LA MAQUINA " + machines[rutina[i]].nombre)
+            machines[rutina[i]].tiempo = 30
+            machines[rutina[i]].estado = True
+            changeState(canvasReference[0], rutina[i], machines[rutina[i]], True)
+            time.sleep(5)
+            machines[rutina[i]].estado = False
+            changeState(canvasReference[0], rutina[i], machines[rutina[i]], True)
+            print(i)
+            rutina.remove(rutina[i])
+            size -= 1
+            print("Rutina: " , rutina)
+            i = 0
+
     print("TERMINASTE TU RUTINA")
     
 
@@ -195,6 +204,8 @@ statesCircles = [0] * 10
 statesPCircles = [0] * 10
 
 img_ref = []
+canvasReference = []
+
 
 def CanvasLeft(ventana):
     # Configuración del canvas
@@ -260,7 +271,7 @@ def CanvasLeft(ventana):
 
 def CanvasRight(ventana : Tk):
     canvas2 = Canvas(ventana, bg="alice blue", width=920, height=800)
-
+    canvasReference.append(canvas2)
     # Configuración de canvas
     
     canvas2.place(relx=1.0, rely=1.0, anchor=SE)
@@ -311,56 +322,57 @@ def CanvasRight(ventana : Tk):
 
 
     #Maquinas
-    statesCircles[0] = canvas2.create_oval(190, 280, 210, 300, width=2, fill='red')
-    statesPCircles[0] = canvas2.create_oval(190, 310, 210, 330, width=2, fill='red')
+    statesCircles[0] = canvas2.create_oval(190, 280, 210, 300, width=2, fill='green')
+    statesPCircles[0] = canvas2.create_oval(190, 310, 210, 330, width=2, fill='white')
 
  
-    statesCircles[1] = canvas2.create_oval(450, 280, 470, 300, width=2, fill='red')
-    statesPCircles[1] = canvas2.create_oval(450, 310, 470, 330, width=2, fill='red')
+    statesCircles[1] = canvas2.create_oval(450, 280, 470, 300, width=2, fill='green')
+    statesPCircles[1] = canvas2.create_oval(450, 310, 470, 330, width=2, fill='white')
 
-    statesCircles[2] = canvas2.create_oval(710, 280, 730, 300, width=2, fill='red')
-    statesPCircles[2] = canvas2.create_oval(710, 310, 730, 330, width=2, fill='red')
+    statesCircles[2] = canvas2.create_oval(710, 280, 730, 300, width=2, fill='green')
+    statesPCircles[2] = canvas2.create_oval(710, 310, 730, 330, width=2, fill='white')
 
-    statesCircles[3] = canvas2.create_oval(110, 470, 130, 490, width=2, fill='red')
-    statesPCircles[3] = canvas2.create_oval(110, 500, 130, 520, width=2, fill='red')
+    statesCircles[3] = canvas2.create_oval(110, 470, 130, 490, width=2, fill='green')
+    statesPCircles[3] = canvas2.create_oval(110, 500, 130, 520, width=2, fill='white')
 
-    statesCircles[4] = canvas2.create_oval(340, 470, 360, 490, width=2, fill='red')
-    statesPCircles[4] = canvas2.create_oval(340, 500, 360, 520, width=2, fill='red')
+    statesCircles[4] = canvas2.create_oval(340, 470, 360, 490, width=2, fill='green')
+    statesPCircles[4] = canvas2.create_oval(340, 500, 360, 520, width=2, fill='white')
 
-    statesCircles[5] = canvas2.create_oval(570, 470, 590, 490, width=2, fill='red')
-    statesPCircles[5] = canvas2.create_oval(570, 500, 590, 520, width=2, fill='red')
+    statesCircles[5] = canvas2.create_oval(570, 470, 590, 490, width=2, fill='green')
+    statesPCircles[5] = canvas2.create_oval(570, 500, 590, 520, width=2, fill='white')
 
-    statesCircles[6] = canvas2.create_oval(800, 470, 820, 490, width=2, fill='red')
-    statesPCircles[6] = canvas2.create_oval(800, 500, 820, 520, width=2, fill='red')
+    statesCircles[6] = canvas2.create_oval(800, 470, 820, 490, width=2, fill='green')
+    statesPCircles[6] = canvas2.create_oval(800, 500, 820, 520, width=2, fill='white')
 
 
-    statesCircles[7] = canvas2.create_oval(190, 660, 210, 680, width=2, fill='red')
-    statesPCircles[7] = canvas2.create_oval(190, 690, 210, 710, width=2, fill='red')
+    statesCircles[7] = canvas2.create_oval(190, 660, 210, 680, width=2, fill='green')
+    statesPCircles[7] = canvas2.create_oval(190, 690, 210, 710, width=2, fill='white')
 
-    statesCircles[8] = canvas2.create_oval(450, 660, 470, 680, width=2, fill='red')
-    statesPCircles[8] = canvas2.create_oval(450, 690, 470, 710, width=2, fill='red')
+    statesCircles[8] = canvas2.create_oval(450, 660, 470, 680, width=2, fill='green')
+    statesPCircles[8] = canvas2.create_oval(450, 690, 470, 710, width=2, fill='white')
 
-    statesCircles[9] = canvas2.create_oval(710, 660, 730, 680, width=2, fill='red')
-    statesPCircles[9] = canvas2.create_oval(710, 690, 730, 710, width=2, fill='red')
+    statesCircles[9] = canvas2.create_oval(710, 660, 730, 680, width=2, fill='green')
+    statesPCircles[9] = canvas2.create_oval(710, 690, 730, 710, width=2, fill='white')
 
-    ventana.after(1000,changeState(canvas2))
+
 
 def display_selected(variable):
     choice = variable.get()
     print(choice)
 
-def changeState( canvas : Canvas):
-    for i in range(0,len(states)):
-        if states[i] == 0:
-            canvas.itemconfig(statesCircles[i], fill='green')
-            #states[i] = 1
-        else:
-            #states[i] = 0
-            canvas.itemconfig(statesCircles[i], fill='red')
-    #for element in states:
-       # print(element)
+def changeState( canvas : Canvas, i, machine, user):
+    if not machine.getEstado():
+        canvas.itemconfig(statesCircles[i], fill='green')
+        if user:
+            canvas.itemconfig(statesPCircles[i], fill='white')
 
-#print
+    else:
+        canvas.itemconfig(statesCircles[i], fill='red')
+        if user:
+            canvas.itemconfig(statesPCircles[i], fill='yellow')
+
+    canvas.update()
+
 
 def main():
     ventana.title("Simulador de Gimnasio")
@@ -370,7 +382,6 @@ def main():
 
 if __name__ == "__main__":
     ventana = Tk()
-    
     main()
     CanvasLeft(ventana)
     CanvasRight(ventana)
