@@ -145,6 +145,7 @@ print("MATRIZ A PARTIR DE USUARIOS RANDOM")
 #print(generarRuntina(matrixEspalda))
 
 #RECORRIENDO LA RUTINA
+current_machine = ""
 def recorridoUsuario(rutina):
     size = len(rutina)
     print("TU RUTINA IDEAL ES:")
@@ -179,6 +180,9 @@ def recorridoUsuario(rutina):
             machines[rutina[i]].tiempo = 30
             machines[rutina[i]].estado = True
             changeState(canvasReference[0], rutina[i], machines[rutina[i]], True)
+            current_machine = machines[rutina[i]].nombre
+            canvasReference[0].itemconfig(text_reference[0],text= "MAQUINA EN USO: " + current_machine)
+            canvasReference[0].update()
             time.sleep(5)
             machines[rutina[i]].estado = False
             changeState(canvasReference[0], rutina[i], machines[rutina[i]], True)
@@ -205,7 +209,7 @@ statesPCircles = [0] * 10
 
 img_ref = []
 canvasReference = []
-
+text_reference = []
 
 def CanvasLeft(ventana):
     # Configuración del canvas
@@ -279,6 +283,8 @@ def CanvasRight(ventana : Tk):
     # Titulo
     canvas2.create_text(475, 50, text="GYM TEC", fill="black", font=('Helvetica 25 bold'))
 
+    text = canvas2.create_text(460, 120, text="MAQUINA EN USO: {0}".format(current_machine), fill="black", font=('Helvetica 15 bold'))
+    text_reference.append(text)
 
     image0 = ImageTk.PhotoImage(Image.open("images/eliptica.png").resize((120,120), Image.ANTIALIAS))
     canvas2.create_image(140,155, image= image0, anchor = "nw")
