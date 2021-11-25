@@ -99,17 +99,17 @@ def generarRuntina(matriz):
     for i in range (9):
         valor = random.uniform(0, 1)
         acum = matriz[pos][0]
-        print("Valor: ", valor)
-        print("Acumulación:", acum)
+        #print("Valor: ", valor)
+        #print("Acumulación:", acum)
         for x in range(1, len(matriz[pos])):
-            print("Dato: ", matriz[pos][x], "Maquina: ", x)
+            #print("Dato: ", matriz[pos][x], "Maquina: ", x)
             if valor >= acum:
                 acum += matriz[pos][x]
                 numero = x
             else:
                 break
         rutina.append(numero)
-        print("Número: ", numero)
+        #print("Número: ", numero)
         pos = numero
         numero = 0
     return rutina
@@ -120,26 +120,26 @@ def generarRuntina(matriz):
 def generarBots():
     pos = 3
     numero = 0
-    for i in range(9):
+    for i in range(1):
         valor = random.uniform(0, 1)
         acum = matrixEspalda[pos][0]
-        print("Valor: ", valor)
-        print("Acumulación:", acum)
+       # print("Valor: ", valor)
+        #print("Acumulación:", acum)
         for x in range(1, len(matrixEspalda[pos])):
-            print("Dato: ", matrixEspalda[pos][x], "Maquina: ", x)
+            #print("Dato: ", matrixEspalda[pos][x], "Maquina: ", x)
             if valor >= acum:
                 acum += matrixEspalda[pos][x]
                 numero = x
             else:
                 break
-        print("Número: ", numero)
+        #print("Número: ", numero)
         machines[numero].estado = True
         #machines[numero].countDown()
         pos = numero
         numero = 0
     return machines
 
-#generarBots()
+generarBots()
 print("MATRIZ A PARTIR DE USUARIOS RANDOM")
 for elemento in machines:
     print(elemento.estado, elemento.tiempo)
@@ -148,20 +148,37 @@ for elemento in machines:
 
 #RECORRIENDO LA RUTINA
 def recorridoUsuario(matrix):
-    rutina = generarRuntina(matrix)
-    #Checar elementos
-    print(rutina,"\n")
-    for i in rutina:
-        if(machines[i].getEstado()==False):
-           #Ocupado
-           continue;
-        else:
-            #Desocupado
-            machines[i].estado = True
-            
-            print("Usando Maquina: ", machines[i].nombre,"\n")
 
-#recorridoUsuario(matrixEspalda)
+    finish = False
+    rutina = generarRuntina(matrix)
+    print("TU RUTINA IDEAL ES:")
+    for i in rutina:
+        print(machines[i].nombre, end= ",")
+    # Checar elementos
+    #print(rutina, "\n")
+    done = 0
+    while not finish:
+        if done == 8:
+            finish = True
+        for i in rutina:
+            if(machines[i].getEstado()==True):
+               #Ocupado
+               print("LA MAQUINA " + machines[i].nombre + " ESTA OCUPADA, BUSCANDO OTRA \n")
+               time.sleep(5)
+               machines[i].estado = True
+               continue;
+            else:
+                #Desocupado
+                print("IR A LA MAQUINA " + machines[i].nombre)
+                time.sleep(5)
+                done +=1
+                #machines[i].estado = True
+                rutina.remove(i)
+                i = 0
+
+                #print("Usando Maquina: ", machines[i].nombre,"\n")
+    print("TERMINASTE TU RUTINA")
+recorridoUsuario(matrixEspalda)
 
 #RECORRIENDO LA RUTINA
         
